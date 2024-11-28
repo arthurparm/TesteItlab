@@ -15,14 +15,6 @@ services:
     ports:
       - "2181:2181"
 
-  kafdrop:
-    image: obsidiandynamics/kafdrop:latest
-    ports:
-      - "9000:9000"
-    environment:
-      KAFKA_BROKER: kafka:9093
-      KAFKA_CONSUMER_GROUP: group
-
   app:
     build: .
     ports:

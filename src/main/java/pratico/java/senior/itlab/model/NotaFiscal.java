@@ -17,11 +17,8 @@ public class NotaFiscal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String clienteId;
-
     private String dadosPagamento;
-
     @Version
     private Long version;
 

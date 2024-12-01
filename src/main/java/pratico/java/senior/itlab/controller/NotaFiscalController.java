@@ -5,28 +5,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.kafka.core.KafkaTemplate;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import pratico.java.senior.itlab.model.NotaFiscal;
-import pratico.java.senior.itlab.service.KafkaConsumer;
-import pratico.java.senior.itlab.service.KafkaProducer;
+import pratico.java.senior.itlab.service.NotaFiscalService;
 
 @AllArgsConstructor
 @RestController
 public class NotaFiscalController {
-    private KafkaProducer kafkaProducer;
-    private KafkaConsumer kafkaConsumer;
-
-    private static final String TOPIC = "nota_fiscal_topic";
+    private NotaFiscalService notaFiscalService;
 
     @PostMapping("/notafiscal")
-    public ResponseEntity<String> sendNotaFiscal(@RequestBody NotaFiscal notaFiscal) {
+    public ResponseEntity<?> sendNotaFiscal(@RequestBody NotaFiscal notaFiscal) {
         try {
-            XmlMapper xmlMapper = new XmlMapper();
-            String xml = xmlMapper.writeValueAsString(notaFiscal);
-            kafkaProducer.sendMessage(TOPIC, xml);
-            kafkaConsumer.consume("TESTE");
-            return ResponseEntity.ok("Nota Fiscal enviada com sucesso!");
+            NotaFiscal notaFiscal1 = notaFiscalService.processarNota(notaFiscal);
+            return ResponseEntity.ok(notaFiscal1);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Erro ao enviar Nota Fiscal: " + e.getMessage());
         }

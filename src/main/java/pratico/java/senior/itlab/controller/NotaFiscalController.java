@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.kafka.core.KafkaTemplate;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import pratico.java.senior.itlab.model.NotaFiscal;
+import pratico.java.senior.itlab.service.KafkaConsumer;
+import pratico.java.senior.itlab.service.KafkaProducer;
 
 @AllArgsConstructor
 @RestController
 public class NotaFiscalController {
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaProducer kafkaProducer;
+    private KafkaConsumer kafkaConsumer;
 
     private static final String TOPIC = "nota_fiscal_topic";
 
@@ -21,7 +24,8 @@ public class NotaFiscalController {
         try {
             XmlMapper xmlMapper = new XmlMapper();
             String xml = xmlMapper.writeValueAsString(notaFiscal);
-            kafkaTemplate.send(TOPIC, xml);
+            kafkaProducer.sendMessage(TOPIC, xml);
+            kafkaConsumer.consume("TESTE");
             return ResponseEntity.ok("Nota Fiscal enviada com sucesso!");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Erro ao enviar Nota Fiscal: " + e.getMessage());

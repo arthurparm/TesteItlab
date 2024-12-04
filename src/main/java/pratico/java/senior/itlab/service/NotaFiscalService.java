@@ -20,8 +20,7 @@ public class NotaFiscalService {
         return repository.save(nota);
     }
 
-    public Boleto lerBoletoNotaFiscal() {
-        String numero = "";
+    public Boleto lerBoletoNotaFiscal(String numero) {
         consumer.consume(numero);
         Boleto boleto = new Boleto();
         boleto.setNumeroBoleto(numero);

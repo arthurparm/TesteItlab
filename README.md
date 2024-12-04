@@ -1,5 +1,8 @@
 # Teste ItLab - Feito por Arthur Paraiso Martins
 
+- Usei o IntelliJ, não sei como ficaria no eclipse, mas acredito que seja bem parecido. 
+
+
 ---
 
 ## Funcionalidades
@@ -20,11 +23,11 @@
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
-- **Java** com **Spring Boot**
-- **Kafka** para troca de mensagens (produtor/consumidor)
-- **Banco de Dados H2** para persistência local
+- **Java 17** com **Spring Boot 3.4.0**
+- **Kafka (Docker)** para troca de mensagens (produtor/consumidor)
+- **Banco H2** para persistência local
 - **Maven** para gerenciamento de dependências
 - **Docker Compose** para orquestração do ambiente
 - **Lombok** para simplificação do código
@@ -32,21 +35,21 @@
 
 ---
 
-## 🏗️ Estrutura do Projeto
+## Como executar?
 
-### **Camadas do Projeto**
-- **Controller**: Controla as requisições REST (ex.: `NotaFiscalController`).
-- **Service**: Contém a lógica de negócios (ex.: `NotaFiscalService`).
-- **Model**: Representa os objetos de domínio (`NotaFiscal` e `Boleto`).
-- **Repository**: Interage com o banco de dados usando Spring Data.
-- **Kafka Services**: Configurações, produtores e consumidores para integração com Kafka.
+1- Certificar-se que esta com a versão 17 do Java.
 
-### **Componentes Externos**
-- ERP do cliente (API REST)
-- Validador do governo (API REST)
-- Microserviço de clientes (API REST)
-- Microserviço de cobrança (Kafka)
+2- Para execução do docker certifique-se que o package foi gerado.Uma alternativa é usar o comando -> **mvn package -DskipTests -f pom.xml** 
+
+3- Execute o dockerfile e o docker compose acompanhada no projeto.
+
+4- O projeto estará disponivel na porta 8080 e o Kafka na 9092. **Se certifique que está com essas portas disponiveis para evitar problemas.**
 
 ---
 
-## 📂 Estrutura de Arquivos
+## O que esperar?
+
+- Terá duas rotas disponiveis **/boleto** e **/notafiscal**.
+- Primeiro devemos enviar a nota na rota **"/notafiscal"**, o sistema irá ler, salvar no banco de dados e enviar a um prodecer que ira incluir no topico a sua nota, te retornando como foi a execução e retornado um erro em caso de falha.
+- Apos isso use a rota  **/boleto** para obter o boleto daquela nota, simulando com um mock a validação.
+- No projeto acompanha exemplos validos utilizados no postman.

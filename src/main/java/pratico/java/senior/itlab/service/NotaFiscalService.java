@@ -21,10 +21,9 @@ public class NotaFiscalService {
     }
 
     public Boleto lerBoletoNotaFiscal() {
-        String numero = "";
-        consumer.consume(numero);
         Boleto boleto = new Boleto();
-        boleto.setNumeroBoleto(numero);
+        consumer.consume(boleto.getNumeroBoleto());
+        boleto.setNumeroBoleto(boleto.getNumeroBoleto());
         return boleto;
     }
 }

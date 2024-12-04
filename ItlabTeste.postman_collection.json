@@ -1,0 +1,69 @@
+{
+	"info": {
+		"_postman_id": "5a9d2664-aa08-4cb9-a41c-75f3e4e41b14",
+		"name": "ItlabTeste",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19537968"
+	},
+	"item": [
+		{
+			"name": "Nota Fiscal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<notaFiscal>\r\n  <clienteId>1</clienteId>\r\n  <dadosPagamento>12345</dadosPagamento>\r\n</notaFiscal>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/notafiscal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"notafiscal"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/notafiscal \\\r\n-H \"Content-Type: application/xml\" \\\r\n-d '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<notaFiscal>\r\n  <clienteId>12345</clienteId>\r\n  <dadosPagamento>Cartão de Crédito</dadosPagamento>\r\n</notaFiscal>'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Boleto",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/boleto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"boleto"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/boleto \\\r\n-H \"Content-Type: application/xml\" \\\r\n-d '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<boleto>\r\n  <numeroBoleto>ABC123456</numeroBoleto>\r\n</boleto>'\r\n"
+			},
+			"response": []
+		}
+	]
+}
